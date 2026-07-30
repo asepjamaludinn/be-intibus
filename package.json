@@ -1,0 +1,41 @@
+{
+  "name": "be-smartbusdisplay",
+  "version": "1.0.0",
+  "description": "Backend API for Smart Bus Display",
+  "keywords": [
+    "smartbusdisplay",
+    "backend",
+    "express",
+    "typescript",
+    "mqtt"
+  ],
+  "license": "ISC",
+  "author": "asepjamaludinn",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.1.2",
+    "@types/pg": "^8.20.0",
+    "prisma": "^7.9.1",
+    "ts-node-dev": "^2.0.0",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.9.1",
+    "@prisma/client": "^7.9.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mqtt": "^5.15.2",
+    "pg": "^8.22.0",
+    "zod": "^4.4.3"
+  }
+}
