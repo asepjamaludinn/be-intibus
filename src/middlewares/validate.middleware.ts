@@ -15,10 +15,11 @@ export const validate = (schema: AnyZodObject) => {
     } catch (error) {
       if (error instanceof ZodError) {
         const errorMessage = error.errors.map((e) => e.message).join(", ");
-        next(new AppError(`Validasi Gagal: ${errorMessage}`, 400));
-      } else {
-        next(error);
+
+        throw new AppError(`Validasi Gagal: ${errorMessage}`, 400);
       }
+
+      throw error;
     }
   };
 };

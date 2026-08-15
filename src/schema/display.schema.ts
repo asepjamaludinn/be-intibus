@@ -5,7 +5,22 @@ export const displayPayloadSchema = z.object({
   direction: z.enum(["Pergi", "Pulang"], {
     required_error: "Direction wajib diisi",
   }),
-  animation: z.string({ required_error: "Animation wajib diisi" }),
+  animation: z.enum(
+    [
+      "Running",
+      "Static",
+      "Blink",
+      "Scroll Left",
+      "Scroll Right",
+      "Scroll Up",
+      "Scroll Down",
+    ],
+    {
+      required_error: "Animation wajib diisi",
+      invalid_type_error:
+        "Animasi tidak didukung (Pilih salah satu mode animasi yang valid)",
+    },
+  ),
   speed: z.number().min(0).max(100, "Speed maksimal 100"),
   brightness: z.number().min(0).max(100, "Brightness maksimal 100"),
   fontSize: z.number().min(8, "Font size terlalu kecil"),

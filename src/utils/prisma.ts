@@ -4,7 +4,11 @@ import { PrismaPg } from "@prisma/adapter-pg";
 
 const connectionString = process.env.DATABASE_URL;
 
-const pool = new Pool({ connectionString });
+console.log("DATABASE_URL:", connectionString);
+
+const pool = new Pool({
+  connectionString,
+});
 
 const adapter = new PrismaPg(pool);
 
