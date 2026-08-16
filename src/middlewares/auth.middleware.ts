@@ -1,31 +1,28 @@
 import type { Request, Response, NextFunction } from "express";
 import { AppError } from "../utils/AppError.js";
+import { verifyDeviceToken } from "../services/device.service.js";
 
-export const requireApiKey = (
+export const requireDeviceAuth = async (
   req: Request,
   res: Response,
   next: NextFunction,
-): void => {
-  const apiKey = req.headers["x-api-key"];
-  const validApiKey = process.env.API_KEY;
+): Promise<void> => {
+  const deviceId = req.header("x-device-id");
+  const deviceToken = req.header("x-device-token");
 
-  if (!validApiKey) {
-    console.error(
-      "[SECURITY] Variabel API_KEY belum dikonfigurasi di file .env",
-    );
-
-    throw new AppError(
-      "Internal Server Error: Konfigurasi keamanan tidak lengkap",
-      500,
-    );
+  if (!deviceId || !deviceToken) {
+    throw new AppError("Unauthorized: kredensial device tidak ditemukan", 401);
   }
 
-  if (!apiKey || apiKey !== validApiKey) {
+  const device = await verifyDeviceToken(deviceId, deviceToken);
+
+  if (!device) {
     throw new AppError(
-      "Unauthorized: API Key tidak valid atau tidak ditemukan",
+      "Unauthorized: device token tidak valid atau sudah dicabut",
       401,
     );
   }
 
+  req.device = { id: device.id, deviceId: device.deviceId, name: device.name };
   next();
 };

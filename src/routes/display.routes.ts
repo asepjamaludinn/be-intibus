@@ -7,7 +7,7 @@ import {
   loadPresets,
 } from "../controllers/display.controller.js";
 import { validate } from "../middlewares/validate.middleware.js";
-import { requireApiKey } from "../middlewares/auth.middleware.js";
+import { requireDeviceAuth } from "../middlewares/auth.middleware.js";
 import {
   displayPayloadSchema,
   presetSchema,
@@ -17,7 +17,7 @@ export const displayRoutes = Router();
 
 displayRoutes.post(
   "/send",
-  requireApiKey,
+  requireDeviceAuth,
   validate(displayPayloadSchema),
   sendToDisplay,
 );
@@ -26,13 +26,13 @@ displayRoutes.get("/status", getStatus);
 
 displayRoutes.post(
   "/presets",
-  requireApiKey,
+  requireDeviceAuth,
   validate(presetSchema),
   savePreset,
 );
 displayRoutes.put(
   "/presets/:id",
-  requireApiKey,
+  requireDeviceAuth,
   validate(presetSchema),
   updatePreset,
 );

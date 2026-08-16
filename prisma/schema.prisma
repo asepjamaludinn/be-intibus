@@ -28,3 +28,21 @@ model DisplayState {
   payload   Json
   updatedAt DateTime @updatedAt
 }
+
+model Device {
+  id         String    @id @default(uuid())
+  deviceId   String    @unique
+  name       String?
+  tokenHash  String
+  createdAt  DateTime  @default(now())
+  lastSeenAt DateTime?
+  revokedAt  DateTime?
+}
+
+model PairingCode {
+  id        String    @id @default(uuid())
+  code      String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+}

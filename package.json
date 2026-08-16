@@ -15,7 +15,8 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "pair:generate": "tsx scripts/generate-pairing-code.ts"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
