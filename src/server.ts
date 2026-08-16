@@ -1,13 +1,12 @@
-import "dotenv/config";
-
+import { env } from "./config/env.js";
 import { app } from "./app.js";
-
-const PORT = process.env.PORT || 3000;
 
 const startServer = async () => {
   try {
-    app.listen(PORT, () => {
-      console.log(`[SERVER] Berjalan di http://localhost:${PORT}`);
+    app.listen(env.PORT, () => {
+      console.log(
+        `[SERVER] Berjalan di http://localhost:${env.PORT} (${env.NODE_ENV})`,
+      );
       console.log(`[INFO] Mode API Sinkronisasi aktif Bluetooth Mode`);
     });
   } catch (error) {
